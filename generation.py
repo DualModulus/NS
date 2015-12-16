@@ -31,7 +31,6 @@ def zipf(a,size,src,dst):
 	for ligne in src:
 		r = rand.random()*240
 		trafic = ligne.rstrip('\n\r').split(" ")
-		duree_traffic
 		dst.write("set sink%s_%s_%s [new Agent/TCPSink]\n" %(trafic[0],trafic[1],trafic[1]))
 		dst.write("$ns attach-agent $n%s $sink%s_%s_%s\n" %(trafic[0],trafic[0],trafic[1],trafic[1]))
 		dst.write("set tcp%s_%s_%s [new Agent/TCP]\n" %(trafic[0],trafic[1],trafic[1]))
