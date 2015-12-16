@@ -1,0 +1,42 @@
+On peut pas utiliser le langage tcl pour faire le script
+
+topo.top 
+
+origine | extremite | capacité (Gb/s) | delai de propagation (en ms)
+
+( pas pas confondre avec source et destination, c'est des liens direct) 
+
+trafic.traf
+
+IL faut tirer des valeurs aléatoires pour démarrer les flux au fur et a mesure pour qu'il n'interfére pas entre eux (0-4min), le réseau est stable
+
+IL faut pourrir un peu le réseau. (on augmente un flux pour pourir le réseau, parler a 25 personnes en me temps.) 
+
+Mettre en place des flux tp qui suivent une loi de puissance, toujours inférieure à la valeur max, pour eviter ça on borne l'intervalle ( soit de 1 à 1000 on borne à 800) (rand%rand_max*4min)
+la borne min est simple à trouver mais la borne max est dure a trouver.
+Il faut suivre la loi zipf ( pour corriger le problème des valeurs qui ne sont pas entières)
+
+POur le rapport il faut voir si par exemple si on met du sack sur le recepteur on voit une une différence et c'est ça que l'on doit voir.
+
+GoodPut: on regarde sur le réseau le rendement d'un flux
+	par exemple pour envoyer 100mb on a du envoyer 300mb soit un rendement de 1/3, on doit voir le goodput
+
+Source	| Destination | volume de trafic (sur 5 min en GB)
+
+il faut au moins 10 000 flux, la simulation peut durer 12h-24h au moins 1h de simulation
+Ce qui compte c'est le nombre de paquet
+
+
+Le débit ne compte peu, ce qui est important c'est le tirage aléatoire de quand on envoie le flux et de qu'elle capacité le flux a.
+
+Modèle ON/OFF
+
+on peut faire de l'udp à la place du tcp
+Il faut savoir parametrer chaque source-destination pour que cela respecte le volume de trafic ( c'est une régle de 3 basiquement)
+IL faut fixer des periodes inférieures à 1s (les rapports sont dans l'ordre de 100ms pour ON et 300ms pour OFF)
+
+Il faut verifier que l'on suit bien le volume avec un lien en envoyant au moins un flux tcp dans chaque lien
+
+Ne pas donner de moyenne, mais donner des écart type
+Faire des figures
+

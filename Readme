@@ -1,0 +1,4 @@
+Pour lancer le script de géneration de code faire
+	python generation.py
+
+un fichier projet.tcl crée, pour le moment aucun trace ne peux être lancé.
