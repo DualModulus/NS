@@ -41,12 +41,9 @@ def zipf(a,size,src,dst):
 		conversion_en_mbits = 1024*1024*8
 		trafic_total = trafic_octet*conversion_en_mbits
 
-		
 		i = 0
 		number_flux = 0
 		trafic_aleatoire = s[i]
-		print ("valeur %s" %s[i])
-		#print trafic_total
 		while trafic_aleatoire < trafic_total:
 			trafic_aleatoire += trafic_aleatoire
 			r = rand.random()*240
