@@ -27,8 +27,11 @@ def filter(src,dst):
 
 def zipf(a,size,src,dst):
 	for ligne in src:
+		i = -1
+		number_flux = 0
 		s = np.random.zipf(a, size)
 		trafic = ligne.rstrip('\n\r').split(" ")
+		trafic_aleatoire = 0
 		dst.write("set sink%s_%s_%s [new Agent/TCPSink]\n" %(trafic[0],trafic[1],trafic[1]))
 		dst.write("$ns attach-agent $n%s $sink%s_%s_%s\n" %(trafic[0],trafic[0],trafic[1],trafic[1]))
 		dst.write("set tcp%s_%s_%s [new Agent/TCP]\n" %(trafic[0],trafic[1],trafic[1]))
@@ -41,15 +44,18 @@ def zipf(a,size,src,dst):
 		conversion_en_mbits = 1024*1024*8
 		trafic_total = trafic_octet*conversion_en_mbits
 
-		i = 0
-		number_flux = 0
-		trafic_aleatoire = s[i]
 		while trafic_aleatoire < trafic_total:
-			trafic_aleatoire += trafic_aleatoire
-			r = rand.random()*240
-			dst.write("$ns at %s \"$ftp%s_%s_%s send %s\"\n" %(r,trafic[0],trafic[1],number_flux,trafic_aleatoire))
-			number_flux += 1
+			i += 1
+			if i < size:
+				trafic_envoye = s[i]
+				r = rand.random()*240
+				dst.write("$ns at %s \"$ftp%s_%s_%s send %s\"\n" %(r,trafic[0],trafic[1],number_flux,trafic_envoye))
+				print ("traffic envoyé : %s " %(trafic_envoye))
+				number_flux += 1
+				trafic_aleatoire += trafic_envoye
+				print ("traffic total envoyé : %s " %(trafic_aleatoire))
 		dst.write("\n")
+		print ("traffic total envoyé : %s " %(trafic_total))
 
 	dst.write("$ns at 300 \"finish\"\n")
 	dst.write("$ns run\n")
@@ -79,7 +85,7 @@ try:
 	destination.write("}\n\n")
 	filter(source, destination)
 	destination.write("\n")
-	zipf(1.2, 10, trafic, destination)
+	zipf(1.2, 10000, trafic, destination)
 
 #Fermeture de tout les fichiers utilisés
 finally:

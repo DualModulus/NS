@@ -6,10 +6,17 @@ import numpy as np
 import random as rand 
 
 
-i = 0
-trafic_total = 10
+i = -1
+size = 1000
+s = np.random.zipf(1.1, size)
+trafic_total = 1250491*1024*1024*8
 number_flux = 0
-while i < trafic_total:
-		i = i+1
-		number_flux += 1
-		print("%s"%(number_flux))
+trafic_envoye = 0
+while trafic_envoye < trafic_total:
+		i +=1
+		if i < size:
+			trafic = s[i]
+			print ("traffic envoyé : %s " %(trafic))
+			trafic_envoye += trafic
+			print ("traffic total envoyé : %s " %(trafic_envoye))
+print ("traffic total : %s " %(trafic_total))
